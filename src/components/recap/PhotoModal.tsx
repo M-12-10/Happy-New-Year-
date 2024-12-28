@@ -20,8 +20,6 @@ interface PhotoModalProps {
 const PhotoModal = ({
   isOpen = true,
   onClose = () => {},
-  photoUrl = "https://images.unsplash.com/photo-1702580477061-93c85d43d09e",
-  photoTitle = "Cute Hello Kitty Moment",
   onPrevious = () => {},
   onNext = () => {},
 }: PhotoModalProps) => {
