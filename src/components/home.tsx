@@ -12,9 +12,9 @@ const Home = () => {
       {/* Header */}
       <div className="bg-pink-50 p-8 text-center border-b border-pink-200">
         <h1 className="text-4xl font-bold text-pink-600 mb-2">
-          Hello Kitty Year Recap
+          The Maryam Recap
         </h1>
-        <p className="text-pink-400">Your sweetest memories of 2023</p>
+        <p className="text-pink-400">My Sweetest Memories of 2024</p>
       </div>
 
       {/* Main Content */}
