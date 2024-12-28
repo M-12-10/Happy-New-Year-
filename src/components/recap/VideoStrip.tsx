@@ -6,7 +6,7 @@ import { Play, Info } from "lucide-react";
 
 interface Video {
   id: string;
-  thumbnail: string;
+  videoUrl: string;
   title: string;
   duration: string;
 }
@@ -19,25 +19,25 @@ interface VideoStripProps {
 const defaultVideos: Video[] = [
   {
     id: "1",
-    thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728",
+    videoUrl: "/assets/videos/video1.mp4",
     title: "Birthday Party Celebration",
     duration: "2:30",
   },
   {
     id: "2",
-    thumbnail: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30",
+    videoUrl: "/assets/videos/video2.mp4",
     title: "Summer Beach Day",
     duration: "3:45",
   },
   {
     id: "3",
-    thumbnail: "https://images.unsplash.com/photo-1496024840928-4c417adf211d",
+    videoUrl: "/assets/videos/video3.mp4",
     title: "Christmas Morning",
     duration: "4:15",
   },
   {
     id: "4",
-    thumbnail: "https://images.unsplash.com/photo-1522158637959-30385a09e0da",
+    videoUrl: "/assets/videos/video4.mp4",
     title: "Family Picnic",
     duration: "2:50",
   },
@@ -61,11 +61,11 @@ const VideoStrip = ({
               onMouseEnter={() => setIsHovering(video.id)}
               onMouseLeave={() => setIsHovering(null)}
             >
-              <div className="relative aspect-video rounded-lg overflow-hidden">
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
+              <div className="relative aspect-video rounded-lg overflow-hidden bg-pink-100">
+                <video
+                  src={video.videoUrl}
                   className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  preload="metadata"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
 
@@ -108,7 +108,7 @@ const VideoStrip = ({
         <VideoPlayer
           isOpen={true}
           onClose={() => setSelectedVideo(null)}
-          videoUrl={videos.find((v) => v.id === selectedVideo)?.thumbnail}
+          videoUrl={videos.find((v) => v.id === selectedVideo)?.videoUrl}
         />
       )}
     </div>

@@ -22,17 +22,17 @@ const defaultFoods: FoodItem[] = [
   {
     id: "1",
     name: "Kawaii Bento Box",
-    image: "https://images.unsplash.com/photo-1530648672449-81f6c723e2f1",
+    image: "/assets/food/bento.jpg",
     date: "2023-12-25",
     location: "Hello Kitty Cafe, Tokyo",
     description:
-      "The most adorable bento box filled with rice shaped like Hello Kitty!",
+      "The most adorable bento box filled with Hello Kitty shaped rice!",
     rating: 5,
   },
   {
     id: "2",
     name: "Pink Macarons",
-    image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43",
+    image: "/assets/food/macarons.jpg",
     date: "2023-12-20",
     location: "Sweet Dreams Bakery",
     description: "Delicate pink macarons with Hello Kitty designs",
@@ -41,7 +41,7 @@ const defaultFoods: FoodItem[] = [
   {
     id: "3",
     name: "Character Latte",
-    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772",
+    image: "/assets/food/latte.jpg",
     date: "2023-12-15",
     location: "Kawaii Coffee Shop",
     description: "A lovely latte with Hello Kitty latte art",
@@ -50,7 +50,7 @@ const defaultFoods: FoodItem[] = [
   {
     id: "4",
     name: "Cute Cupcakes",
-    image: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d",
+    image: "/assets/food/cupcakes.jpg",
     date: "2023-12-10",
     location: "Ribbon Pastries",
     description: "Pink frosted cupcakes with bow decorations",
@@ -59,7 +59,7 @@ const defaultFoods: FoodItem[] = [
   {
     id: "5",
     name: "Strawberry Cake",
-    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777",
+    image: "/assets/food/cake.jpg",
     date: "2023-12-05",
     location: "Sweet Corner",
     description: "Fresh strawberry cake with Hello Kitty topper",
@@ -68,7 +68,7 @@ const defaultFoods: FoodItem[] = [
   {
     id: "6",
     name: "Character Cookies",
-    image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e",
+    image: "/assets/food/cookies.jpg",
     date: "2023-12-01",
     location: "Cookie Paradise",
     description: "Decorated cookies with kawaii characters",
@@ -130,22 +130,6 @@ const FoodGrid = ({ foods = defaultFoods }: FoodGridProps) => {
           food={selectedFood}
         />
       )}
-
-      {/* Decorative Hello Kitty elements */}
-      <div className="fixed top-8 right-8 animate-bounce">
-        <img
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty1"
-          alt="Hello Kitty decoration"
-          className="w-16 h-16 opacity-50"
-        />
-      </div>
-      <div className="fixed bottom-8 left-8 animate-bounce delay-150">
-        <img
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty2"
-          alt="Hello Kitty decoration"
-          className="w-16 h-16 opacity-50"
-        />
-      </div>
     </div>
   );
 };

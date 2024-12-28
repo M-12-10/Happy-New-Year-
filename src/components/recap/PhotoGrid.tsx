@@ -15,32 +15,32 @@ interface PhotoGridProps {
 const defaultPhotos: Photo[] = [
   {
     id: "1",
-    url: "https://images.unsplash.com/photo-1702580477061-93c85d43d09e",
+    url: "/assets/photos/photo1.jpg",
     title: "Hello Kitty Cafe Visit",
   },
   {
     id: "2",
-    url: "https://images.unsplash.com/photo-1702665420575-76dc2ad67095",
+    url: "/assets/photos/photo2.jpg",
     title: "Sakura Festival",
   },
   {
     id: "3",
-    url: "https://images.unsplash.com/photo-1702343800920-aa51c2c6c482",
+    url: "/assets/photos/photo3.jpg",
     title: "Birthday Party",
   },
   {
     id: "4",
-    url: "https://images.unsplash.com/photo-1702338741265-c449be607f18",
+    url: "/assets/photos/photo4.jpg",
     title: "Summer Picnic",
   },
   {
     id: "5",
-    url: "https://images.unsplash.com/photo-1702309201661-c5de9ff534d0",
+    url: "/assets/photos/photo5.jpg",
     title: "Christmas Celebration",
   },
   {
     id: "6",
-    url: "https://images.unsplash.com/photo-1702309714891-34a93bf44a23",
+    url: "/assets/photos/photo6.jpg",
     title: "New Year Party",
   },
 ];
