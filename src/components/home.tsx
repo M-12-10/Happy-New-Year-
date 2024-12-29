@@ -42,8 +42,8 @@ const Home = () => {
                     have a bad one. You are beyond amazing and you shine so
                     brightly, you give me purpose and you make me a happier
                     person. With every bit of conviction this entire universe
-                    can muster up, I LOVE YOU! InshaAllah we spend every year
-                    together for the rest of all time 🌸
+                    can muster up, I LOVE YOU SO MUCH MARYAM! InshaAllah we
+                    spend every year together for the rest of all time 🌸
                   </p>
                 </div>
               </div>
