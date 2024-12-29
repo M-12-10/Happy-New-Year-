@@ -1,11 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CategoryTabs from "./recap/CategoryTabs";
 import FoodGrid from "./recap/FoodGrid";
 import PhotoGrid from "./recap/PhotoGrid";
 import VideoStrip from "./recap/VideoStrip";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("food");
+  const { toast } = useToast();
+
+  useEffect(() => {
+    toast({
+      duration: 10000,
+      className: "bg-pink-50 border-pink-200",
+      description: (
+        <div className="flex flex-col items-center space-y-4 py-2">
+          <img
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty1"
+            alt="Hello Kitty"
+            className="w-16 h-16"
+          />
+          <div className="text-center space-y-2">
+            <h3 className="font-bold text-pink-600 text-lg">
+              Happy New Year, My Love! 💖
+            </h3>
+            <p className="text-pink-500">
+              Here's to another year of creating beautiful memories together.
+              You make every moment special! 🌸
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            className="bg-pink-100 hover:bg-pink-200 border-pink-300"
+          >
+            <Heart className="mr-2 h-4 w-4 text-pink-500" />
+            <span className="text-pink-600">Love You!</span>
+          </Button>
+        </div>
+      ),
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white">
