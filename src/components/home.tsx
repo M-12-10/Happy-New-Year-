@@ -6,14 +6,15 @@ import VideoStrip from "./recap/VideoStrip";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
+import { Toaster } from "@/components/ui/toaster";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("food");
   const { toast } = useToast();
 
   useEffect(() => {
+    // Show toast without duration (persistent)
     toast({
-      duration: 10000,
       className: "bg-pink-50 border-pink-200",
       description: (
         <div className="flex flex-col items-center space-y-4 py-2">
@@ -41,7 +42,7 @@ const Home = () => {
         </div>
       ),
     });
-  }, []);
+  }, [toast]); // Add toast to dependency array
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white">
@@ -91,6 +92,9 @@ const Home = () => {
           Made with ❤️ and lots of kawaii spirit
         </p>
       </div>
+
+      {/* Toast Container */}
+      <Toaster />
     </div>
   );
 };
