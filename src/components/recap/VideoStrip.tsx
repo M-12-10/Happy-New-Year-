@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card } from "@/components/ui/card";
 import VideoPlayer from "./VideoPlayer";
 
 interface Video {
@@ -38,23 +39,23 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
   const displayVideos = videos || localVideos;
 
   return (
-    <div className="w-full bg-pink-50 p-6 rounded-xl">
+    <div className="w-full bg-pink-50 p-6 min-h-screen">
       <ScrollArea className="w-full">
-        <div className="flex gap-4 pb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
           {displayVideos.map((video) => (
-            <div
+            <Card
               key={video.id}
-              className="relative flex-shrink-0 w-[300px]"
+              className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-white"
               onClick={() => setSelectedVideo(video.id)}
             >
-              <div className="relative aspect-video rounded-lg overflow-hidden bg-pink-100">
+              <div className="aspect-square relative overflow-hidden">
                 <video
                   src={video.videoUrl}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   preload="metadata"
                 />
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </ScrollArea>

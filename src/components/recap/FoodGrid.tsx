@@ -58,18 +58,18 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
 
   return (
     <div className="bg-pink-50 p-6 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
         {displayFoods.map((food, index) => (
           <Card
             key={food.id}
-            className="group relative overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white"
+            className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-white"
             onClick={() => handleFoodClick(food, index)}
           >
-            <div className="relative aspect-square overflow-hidden">
+            <div className="aspect-square relative overflow-hidden">
               <img
                 src={food.image}
                 alt="Food item"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </Card>

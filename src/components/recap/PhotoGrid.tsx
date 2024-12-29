@@ -58,18 +58,18 @@ const PhotoGrid = ({ photos }: PhotoGridProps) => {
 
   return (
     <div className="bg-pink-50 p-6 min-h-screen">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
         {displayPhotos.map((photo, index) => (
           <Card
             key={photo.id}
-            className="group relative overflow-hidden cursor-pointer"
+            className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-white"
             onClick={() => handlePhotoClick(photo, index)}
           >
-            <div className="aspect-square relative">
+            <div className="aspect-square relative overflow-hidden">
               <img
                 src={photo.url}
                 alt="Photo"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           </Card>
