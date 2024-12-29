@@ -9,18 +9,24 @@ import {
   SkipForward,
   Volume2,
   VolumeX,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 interface VideoPlayerProps {
   isOpen?: boolean;
   onClose?: () => void;
   videoUrl?: string;
+  onPrevious?: () => void;
+  onNext?: () => void;
 }
 
 const VideoPlayer = ({
   isOpen = true,
   onClose = () => {},
   videoUrl = "",
+  onPrevious = () => {},
+  onNext = () => {},
 }: VideoPlayerProps) => {
   const playerRef = useRef<ReactPlayer>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -84,9 +90,35 @@ const VideoPlayer = ({
                   attributes: {
                     crossOrigin: "anonymous",
                   },
+                  forceVideo: true,
+                  forceHLS: false,
+                  forceDASH: false,
                 },
               }}
             />
+
+            {/* Navigation Overlay */}
+            <div className="absolute inset-y-0 left-0 flex items-center">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full bg-white/30 hover:bg-white/50 ml-4"
+                onClick={onPrevious}
+              >
+                <ChevronLeft className="h-8 w-8" />
+              </Button>
+            </div>
+
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full bg-white/30 hover:bg-white/50 mr-4"
+                onClick={onNext}
+              >
+                <ChevronRight className="h-8 w-8" />
+              </Button>
+            </div>
           </div>
 
           {/* Kawaii-style Controls */}

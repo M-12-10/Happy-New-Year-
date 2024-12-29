@@ -16,6 +16,7 @@ interface VideoStripProps {
 
 const VideoStrip = ({ videos }: VideoStripProps) => {
   const [selectedVideo, setSelectedVideo] = React.useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [localVideos, setLocalVideos] = useState<Video[]>([]);
 
   useEffect(() => {
@@ -40,6 +41,25 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
 
   const displayVideos = videos || localVideos;
 
+  const handleVideoClick = (videoId: string) => {
+    const index = displayVideos.findIndex((v) => v.id === videoId);
+    setCurrentIndex(index);
+    setSelectedVideo(videoId);
+  };
+
+  const handlePrevious = () => {
+    const newIndex =
+      (currentIndex - 1 + displayVideos.length) % displayVideos.length;
+    setCurrentIndex(newIndex);
+    setSelectedVideo(displayVideos[newIndex].id);
+  };
+
+  const handleNext = () => {
+    const newIndex = (currentIndex + 1) % displayVideos.length;
+    setCurrentIndex(newIndex);
+    setSelectedVideo(displayVideos[newIndex].id);
+  };
+
   return (
     <div className="w-full bg-pink-50 p-6 min-h-screen">
       <ScrollArea className="w-full">
@@ -48,7 +68,7 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
             <Card
               key={video.id}
               className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-white"
-              onClick={() => setSelectedVideo(video.id)}
+              onClick={() => handleVideoClick(video.id)}
             >
               <div className="aspect-square relative overflow-hidden">
                 <ReactPlayer
@@ -61,6 +81,16 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
                       <Play className="w-12 h-12 text-white" />
                     </div>
                   }
+                  config={{
+                    file: {
+                      attributes: {
+                        crossOrigin: "anonymous",
+                      },
+                      forceVideo: true,
+                      forceHLS: false,
+                      forceDASH: false,
+                    },
+                  }}
                 />
               </div>
             </Card>
@@ -73,6 +103,8 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
           isOpen={true}
           onClose={() => setSelectedVideo(null)}
           videoUrl={displayVideos.find((v) => v.id === selectedVideo)?.videoUrl}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
         />
       )}
     </div>
