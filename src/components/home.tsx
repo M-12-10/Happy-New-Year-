@@ -3,49 +3,58 @@ import CategoryTabs from "./recap/CategoryTabs";
 import FoodGrid from "./recap/FoodGrid";
 import PhotoGrid from "./recap/PhotoGrid";
 import VideoStrip from "./recap/VideoStrip";
-import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
-import { Toaster } from "@/components/ui/toaster";
+import { Heart, X } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("food");
-  const { toast } = useToast();
-
-  useEffect(() => {
-    // Show toast without duration (persistent)
-    toast({
-      className: "bg-pink-50 border-pink-200",
-      description: (
-        <div className="flex flex-col items-center space-y-4 py-2">
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty1"
-            alt="Hello Kitty"
-            className="w-16 h-16"
-          />
-          <div className="text-center space-y-2">
-            <h3 className="font-bold text-pink-600 text-lg">
-              Happy New Year, My Love! 💖
-            </h3>
-            <p className="text-pink-500">
-              Here's to another year of creating beautiful memories together.
-              You make every moment special! 🌸
-            </p>
-          </div>
-          <Button
-            variant="outline"
-            className="bg-pink-100 hover:bg-pink-200 border-pink-300"
-          >
-            <Heart className="mr-2 h-4 w-4 text-pink-500" />
-            <span className="text-pink-600">Love You!</span>
-          </Button>
-        </div>
-      ),
-    });
-  }, [toast]); // Add toast to dependency array
+  const [showWelcome, setShowWelcome] = useState(true);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white">
+      {/* Welcome Dialog */}
+      <Dialog open={showWelcome} onOpenChange={setShowWelcome}>
+        <DialogContent className="max-w-2xl bg-gradient-to-b from-pink-50 to-white p-0 border-2 border-pink-200">
+          <div className="relative p-6">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-2 hover:bg-pink-100"
+              onClick={() => setShowWelcome(false)}
+            >
+              <X className="h-4 w-4 text-pink-400" />
+            </Button>
+
+            <div className="flex flex-col items-center space-y-6 pt-4">
+              <div className="text-center space-y-4">
+                <h2 className="text-3xl font-bold text-pink-600">
+                  Happy New Year, My Love! 💖
+                </h2>
+                <p className="text-lg text-pink-500 max-w-md mx-auto">
+                  Here's to another year of creating beautiful memories
+                  together. You make every moment special! 🌸
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <Button
+                  variant="outline"
+                  className="bg-pink-100 hover:bg-pink-200 border-pink-300 px-8"
+                  onClick={() => setShowWelcome(false)}
+                >
+                  <Heart className="mr-2 h-5 w-5 text-pink-500" />
+                  <span className="text-pink-600 text-lg">Love You Too!</span>
+                </Button>
+                <p className="text-sm text-pink-400 mt-2">
+                  Click to see our memories 💕
+                </p>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Header */}
       <div className="bg-pink-50 p-8 text-center border-b border-pink-200">
         <h1 className="text-4xl font-bold text-pink-600 mb-2">
@@ -68,33 +77,14 @@ const Home = () => {
           {activeTab === "photos" && <PhotoGrid />}
           {activeTab === "videos" && <VideoStrip />}
         </div>
-
-        {/* Decorative Elements */}
-        <div className="fixed top-20 left-4 animate-bounce delay-100">
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty3"
-            alt="Hello Kitty decoration"
-            className="w-16 h-16 opacity-30"
-          />
-        </div>
-        <div className="fixed bottom-4 right-4 animate-bounce delay-300">
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty4"
-            alt="Hello Kitty decoration"
-            className="w-16 h-16 opacity-30"
-          />
-        </div>
       </div>
 
       {/* Footer */}
       <div className="bg-pink-50 py-4 text-center border-t border-pink-200">
         <p className="text-pink-400 text-sm">
-          Made with ❤️ and lots of kawaii spirit
+          Made with lots of ❤️ for my most special person
         </p>
       </div>
-
-      {/* Toast Container */}
-      <Toaster />
     </div>
   );
 };
