@@ -24,7 +24,7 @@ const CategoryTabs = ({
             className="flex items-center gap-2 data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700"
           >
             <Utensils className="h-4 w-4" />
-            <span>Food Adventures</span>
+            <span>Daily Shenanigans</span>
           </TabsTrigger>
           <TabsTrigger
             value="photos"

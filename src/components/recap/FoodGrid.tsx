@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import FoodDetailModal from "./FoodDetailModal";
+import PhotoModal from "./PhotoModal";
 
 interface FoodItem {
   id: string;
@@ -58,10 +58,10 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
       </div>
 
       {selectedFood && (
-        <FoodDetailModal
+        <PhotoModal
           isOpen={true}
           onClose={() => setSelectedFood(null)}
-          food={selectedFood}
+          photoUrl={selectedFood.image}
         />
       )}
     </div>
