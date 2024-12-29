@@ -3,7 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/M-12-10/Happy-New-Year-",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-no-errors": "tsc ; vite build",
@@ -67,6 +70,7 @@
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react-swc": "3.5.0",
     "autoprefixer": "^10.4.19",
+    "gh-pages": "^6.2.0",
     "postcss": "^8.4.38",
     "tailwindcss": "3.4.1",
     "tempo-devtools": "^2.0.94",

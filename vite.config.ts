@@ -9,10 +9,9 @@ const conditionalPlugins: [string, Record<string, any>][] = [];
 if (process.env.TEMPO === "true") {
   conditionalPlugins.push(["tempo-devtools/swc", {}]);
 }
-
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.VITE_BASE_PATH || "/",
+  base: process.env.VITE_BASE_PATH || "/Happy-New-Year-/",
   optimizeDeps: {
     entries: ["src/main.tsx", "src/tempobook/**/*"],
   },
