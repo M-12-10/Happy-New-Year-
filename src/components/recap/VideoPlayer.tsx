@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,8 +21,65 @@ const VideoPlayer = ({
   onClose = () => {},
   videoUrl = "https://example.com/sample-video.mp4",
 }: VideoPlayerProps) => {
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const [isMuted, setIsMuted] = React.useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.addEventListener("loadedmetadata", () => {
+        setDuration(videoRef.current?.duration || 0);
+      });
+
+      videoRef.current.addEventListener("timeupdate", () => {
+        setCurrentTime(videoRef.current?.currentTime || 0);
+      });
+    }
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleSkipBack = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = Math.max(
+        0,
+        videoRef.current.currentTime - 10,
+      );
+    }
+  };
+
+  const handleSkipForward = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = Math.min(
+        videoRef.current.duration,
+        videoRef.current.currentTime + 10,
+      );
+    }
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -30,13 +87,12 @@ const VideoPlayer = ({
         <div className="space-y-4">
           {/* Video Display Area */}
           <div className="relative aspect-video bg-pink-100 rounded-lg overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=kitty"
-                alt="Hello Kitty placeholder"
-                className="w-24 h-24 opacity-50"
-              />
-            </div>
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              className="w-full h-full object-contain"
+              onClick={togglePlay}
+            />
           </div>
 
           {/* Kawaii-style Controls */}
@@ -46,7 +102,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={() => {}}
+                onClick={handleSkipBack}
               >
                 <SkipBack className="h-6 w-6" />
               </Button>
@@ -55,7 +111,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={() => setIsPlaying(!isPlaying)}
+                onClick={togglePlay}
               >
                 {isPlaying ? (
                   <Pause className="h-6 w-6" />
@@ -68,7 +124,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={() => {}}
+                onClick={handleSkipForward}
               >
                 <SkipForward className="h-6 w-6" />
               </Button>
@@ -77,7 +133,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={() => setIsMuted(!isMuted)}
+                onClick={toggleMute}
               >
                 {isMuted ? (
                   <VolumeX className="h-6 w-6" />
@@ -91,13 +147,13 @@ const VideoPlayer = ({
             <div className="mt-4 px-4">
               <div className="h-2 bg-pink-100 rounded-full">
                 <div
-                  className="h-full w-1/3 bg-pink-400 rounded-full"
-                  style={{ width: "33%" }}
+                  className="h-full bg-pink-400 rounded-full transition-all duration-150"
+                  style={{ width: `${(currentTime / duration) * 100}%` }}
                 />
               </div>
               <div className="flex justify-between text-sm text-pink-400 mt-1">
-                <span>0:00</span>
-                <span>3:45</span>
+                <span>{formatTime(currentTime)}</span>
+                <span>{formatTime(duration)}</span>
               </div>
             </div>
           </div>
