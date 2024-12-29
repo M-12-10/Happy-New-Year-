@@ -20,7 +20,12 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
     // Function to get all files from /assets/food
     const loadFoodImages = async () => {
       try {
-        const foodFiles = import.meta.glob("/public/assets/food/*");
+        // Get both jpg and png files
+        const jpgFiles = import.meta.glob("/public/assets/food/*.{jpg,jpeg}");
+        const pngFiles = import.meta.glob("/public/assets/food/*.png");
+
+        // Combine both file types
+        const foodFiles = { ...jpgFiles, ...pngFiles };
         const foodItems: FoodItem[] = Object.keys(foodFiles).map((path) => ({
           id: path,
           image: path.replace("/public", ""),
@@ -70,6 +75,7 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
                 src={food.image}
                 alt="Food item"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
               />
             </div>
           </Card>

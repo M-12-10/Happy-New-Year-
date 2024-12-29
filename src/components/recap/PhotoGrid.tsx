@@ -20,7 +20,12 @@ const PhotoGrid = ({ photos }: PhotoGridProps) => {
     // Function to get all files from /assets/photos
     const loadPhotos = async () => {
       try {
-        const photoFiles = import.meta.glob("/public/assets/photos/*");
+        // Get both jpg and png files
+        const jpgFiles = import.meta.glob("/public/assets/photos/*.{jpg,jpeg}");
+        const pngFiles = import.meta.glob("/public/assets/photos/*.png");
+
+        // Combine both file types
+        const photoFiles = { ...jpgFiles, ...pngFiles };
         const photoItems: Photo[] = Object.keys(photoFiles).map((path) => ({
           id: path,
           url: path.replace("/public", ""),
@@ -70,6 +75,7 @@ const PhotoGrid = ({ photos }: PhotoGridProps) => {
                 src={photo.url}
                 alt="Photo"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
               />
             </div>
           </Card>
