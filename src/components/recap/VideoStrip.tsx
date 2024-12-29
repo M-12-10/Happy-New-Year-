@@ -3,7 +3,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { Play } from "lucide-react";
 import VideoPlayer from "./VideoPlayer";
-import ReactPlayer from "react-player";
 
 interface Video {
   id: string;
@@ -71,27 +70,17 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
               onClick={() => handleVideoClick(video.id)}
             >
               <div className="aspect-square relative overflow-hidden">
-                <ReactPlayer
-                  url={video.videoUrl}
-                  width="100%"
-                  height="100%"
-                  light={true}
-                  playIcon={
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                      <Play className="w-12 h-12 text-white" />
-                    </div>
-                  }
-                  config={{
-                    file: {
-                      attributes: {
-                        crossOrigin: "anonymous",
-                      },
-                      forceVideo: true,
-                      forceHLS: false,
-                      forceDASH: false,
-                    },
-                  }}
-                />
+                <video
+                  className="w-full h-full object-cover"
+                  preload="metadata"
+                  muted
+                  playsInline
+                >
+                  <source src={`${video.videoUrl}#t=0.1`} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                  <Play className="w-12 h-12 text-white" />
+                </div>
               </div>
             </Card>
           ))}
