@@ -71,7 +71,7 @@ const Home = () => {
         <h1 className="text-4xl font-bold text-pink-600 mb-2">
           The Maryam Recap
         </h1>
-        <p className="text-pink-400">My Sweetest Memories of 2024</p>
+        <p className="text-pink-600">My Sweetest Memories of 2024</p>
       </div>
 
       {/* Main Content */}
