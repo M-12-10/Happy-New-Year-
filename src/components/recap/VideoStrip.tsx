@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
+import { Play } from "lucide-react";
 import VideoPlayer from "./VideoPlayer";
+import ReactPlayer from "react-player";
 
 interface Video {
   id: string;
@@ -49,10 +51,16 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
               onClick={() => setSelectedVideo(video.id)}
             >
               <div className="aspect-square relative overflow-hidden">
-                <video
-                  src={video.videoUrl}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  preload="metadata"
+                <ReactPlayer
+                  url={video.videoUrl}
+                  width="100%"
+                  height="100%"
+                  light={true}
+                  playIcon={
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                      <Play className="w-12 h-12 text-white" />
+                    </div>
+                  }
                 />
               </div>
             </Card>

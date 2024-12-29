@@ -1,6 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import ReactPlayer from "react-player";
 import {
   Play,
   Pause,
@@ -19,67 +20,47 @@ interface VideoPlayerProps {
 const VideoPlayer = ({
   isOpen = true,
   onClose = () => {},
-  videoUrl = "https://example.com/sample-video.mp4",
+  videoUrl = "",
 }: VideoPlayerProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<ReactPlayer>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.addEventListener("loadedmetadata", () => {
-        setDuration(videoRef.current?.duration || 0);
-      });
-
-      videoRef.current.addEventListener("timeupdate", () => {
-        setCurrentTime(videoRef.current?.currentTime || 0);
-      });
-    }
-  }, []);
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
+  const handleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  const handleProgress = (state: { played: number }) => {
+    setPlayed(state.played);
+  };
+
+  const handleDuration = (duration: number) => {
+    setDuration(duration);
   };
 
   const handleSkipBack = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = Math.max(
-        0,
-        videoRef.current.currentTime - 10,
-      );
-    }
+    const currentTime = playerRef.current?.getCurrentTime() || 0;
+    playerRef.current?.seekTo(Math.max(0, currentTime - 10));
   };
 
   const handleSkipForward = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = Math.min(
-        videoRef.current.duration,
-        videoRef.current.currentTime + 10,
-      );
-    }
+    const currentTime = playerRef.current?.getCurrentTime() || 0;
+    playerRef.current?.seekTo(Math.min(duration, currentTime + 10));
   };
 
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
+
+  const currentTime = played * duration;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -87,11 +68,24 @@ const VideoPlayer = ({
         <div className="space-y-4">
           {/* Video Display Area */}
           <div className="relative aspect-video bg-pink-100 rounded-lg overflow-hidden">
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              className="w-full h-full object-contain"
-              onClick={togglePlay}
+            <ReactPlayer
+              ref={playerRef}
+              url={videoUrl}
+              width="100%"
+              height="100%"
+              playing={isPlaying}
+              muted={isMuted}
+              onProgress={handleProgress}
+              onDuration={handleDuration}
+              controls={false}
+              onClick={handlePlayPause}
+              config={{
+                file: {
+                  attributes: {
+                    crossOrigin: "anonymous",
+                  },
+                },
+              }}
             />
           </div>
 
@@ -111,7 +105,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={togglePlay}
+                onClick={handlePlayPause}
               >
                 {isPlaying ? (
                   <Pause className="h-6 w-6" />
@@ -133,7 +127,7 @@ const VideoPlayer = ({
                 variant="ghost"
                 size="icon"
                 className="hover:bg-pink-100 text-pink-500"
-                onClick={toggleMute}
+                onClick={handleMute}
               >
                 {isMuted ? (
                   <VolumeX className="h-6 w-6" />
@@ -148,7 +142,7 @@ const VideoPlayer = ({
               <div className="h-2 bg-pink-100 rounded-full">
                 <div
                   className="h-full bg-pink-400 rounded-full transition-all duration-150"
-                  style={{ width: `${(currentTime / duration) * 100}%` }}
+                  style={{ width: `${played * 100}%` }}
                 />
               </div>
               <div className="flex justify-between text-sm text-pink-400 mt-1">
