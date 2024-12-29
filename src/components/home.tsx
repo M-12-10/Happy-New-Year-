@@ -28,13 +28,24 @@ const Home = () => {
 
             <div className="flex flex-col items-center space-y-6 pt-4">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl font-bold text-pink-600">
-                  Happy New Year, My Love! 💖
+                <h2 className="text-3xl font-bold text-pink-600 animate-bounce">
+                  Happy New Year, Meri Jaan! 💖
                 </h2>
-                <p className="text-lg text-pink-500 max-w-md mx-auto">
-                  Here's to another year of creating beautiful memories
-                  together. You make every moment special! 🌸
-                </p>
+                <div className="bg-pink-50/80 backdrop-blur-sm p-6 rounded-xl border-2 border-pink-200 shadow-lg">
+                  <p className="text-lg text-pink-500 max-w-md mx-auto text-justify">
+                    To think that this time last year, we were just two randoms
+                    added in each other's friendlists, unaware of the other
+                    person's existence. However, now, I simply can't imagine my
+                    life without you. Everyday, I wake up excited because you
+                    are part of my daily routine. I look forward to telling you
+                    all about a good day and want to come back to you when I
+                    have a bad one. You are beyond amazing and you shine so
+                    brightly, you give me purpose and you make me a happier
+                    person. With every bit of conviction this entire universe
+                    can muster up, I LOVE YOU! InshaAllah we spend every year
+                    together for the rest of all time 🌸
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col items-center space-y-2">
