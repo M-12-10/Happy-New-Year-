@@ -32,19 +32,22 @@ const Home = () => {
                   Happy New Year, Meri Jaan! 💖
                 </h2>
                 <div className="bg-pink-50/80 backdrop-blur-sm p-6 rounded-xl border-2 border-pink-200 shadow-lg">
-                  <p className="text-lg text-pink-500 max-w-md mx-auto text-justify">
+                  <p className="text-lg text-pink-500 max-w-md mx-auto ">
                     To think that this time last year, we were just two randoms
                     added in each other's friendlists, unaware of the other
                     person's existence. However, now, I simply can't imagine my
-                    life without you. Everyday, I wake up excited because you
-                    are part of my daily routine. I look forward to telling you
-                    all about a good day and want to come back to you when I
-                    have a bad one. You are beyond amazing and you shine so
-                    brightly, you give me purpose and you make me a happier
-                    person. With every bit of conviction this entire universe
-                    can muster up, I LOVE YOU SO MUCH MARYAM! InshaAllah we
-                    spend every year together for the rest of all time 🌸
+                    life without you. <br></br>
+                    <br></br> Everyday, I wake up excited because you are part
+                    of my daily routine. I look forward to telling you all about
+                    a good day and want to come back to you when I have a bad
+                    one. You are beyond amazing and you shine so brightly, you
+                    give me purpose and you make me a happier person. <br></br>
+                    <br></br>With every last bit of conviction that this entire
+                    universe can muster up, <b>I LOVE YOU SO MUCH MARYAM!</b>
+                    <br></br>InshaAllah we spend every year together for the
+                    rest of all time 🌸
                   </p>
+                  <p className="text-lg text-pink-500 max-w-md mx-auto "></p>
                 </div>
               </div>
 
