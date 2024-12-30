@@ -33,6 +33,6 @@ jobs:
       run: |
         git config --global user.email "buttwahaj110@gmail.com"
         git config --global user.name "M-12-10"
-        git remote set-url origin https://www.github.com/M-12-10/Happy-New-Year-.git
+        git remote set-url origin https://github.com/M-12-10/Happy-New-Year-.git
         npm run deploy
     - run: npm run deploy
