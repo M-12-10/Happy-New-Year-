@@ -110,7 +110,7 @@ const Home = () => {
       {/* Header with decorative image above the text */}
       <div className="bg-pink-50 p-8 border-b border-pink-200">
         {/* Stack everything in a column, centered */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center"> 
           <img
             src="public/assets/Screenshot 2024-12-30 140418.png"
             alt="Decorative"
