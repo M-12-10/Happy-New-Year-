@@ -21,15 +21,28 @@ const PhotoGrid = ({ photos }: PhotoGridProps) => {
     const loadPhotos = async () => {
       try {
         // Get both jpg and png files
-        const jpgFiles = import.meta.glob("/public/assets/photos/*.{jpg,jpeg}");
-        const pngFiles = import.meta.glob("/public/assets/photos/*.png");
+        const jpgFiles = import.meta.glob(
+          "/public/assets/photos/*.{jpg,jpeg}",
+          {
+            eager: true,
+          },
+        );
+        const pngFiles = import.meta.glob("/public/assets/photos/*.png", {
+          eager: true,
+        });
 
-        // Combine both file types
-        const photoFiles = { ...jpgFiles, ...pngFiles };
-        const photoItems: Photo[] = Object.keys(photoFiles).map((path) => ({
-          id: path,
-          url: path.replace("/public", ""),
-        }));
+        // Combine both file types and convert to array
+        const photoItems: Photo[] = [
+          ...Object.entries(jpgFiles).map(([path, module]: [string, any]) => ({
+            id: path,
+            url: module.default,
+          })),
+          ...Object.entries(pngFiles).map(([path, module]: [string, any]) => ({
+            id: path,
+            url: module.default,
+          })),
+        ];
+
         setLocalPhotos(photoItems);
       } catch (error) {
         console.error("Error loading photos:", error);

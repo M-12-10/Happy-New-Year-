@@ -21,15 +21,25 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
     const loadFoodImages = async () => {
       try {
         // Get both jpg and png files
-        const jpgFiles = import.meta.glob("/public/assets/food/*.{jpg,jpeg}");
-        const pngFiles = import.meta.glob("/public/assets/food/*.png");
+        const jpgFiles = import.meta.glob("/public/assets/food/*.{jpg,jpeg}", {
+          eager: true,
+        });
+        const pngFiles = import.meta.glob("/public/assets/food/*.png", {
+          eager: true,
+        });
 
-        // Combine both file types
-        const foodFiles = { ...jpgFiles, ...pngFiles };
-        const foodItems: FoodItem[] = Object.keys(foodFiles).map((path) => ({
-          id: path,
-          image: path.replace("/public", ""),
-        }));
+        // Combine both file types and convert to array
+        const foodItems: FoodItem[] = [
+          ...Object.entries(jpgFiles).map(([path, module]: [string, any]) => ({
+            id: path,
+            image: module.default,
+          })),
+          ...Object.entries(pngFiles).map(([path, module]: [string, any]) => ({
+            id: path,
+            image: module.default,
+          })),
+        ];
+
         setLocalFoods(foodItems);
       } catch (error) {
         console.error("Error loading food images:", error);
