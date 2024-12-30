@@ -6,7 +6,7 @@
   "homepage": "https://m-12-10.github.io/Happy-New-Year-/",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "git config --global user.email 'buttwahaj110@gmail.com' && git config --global user.name 'M-12-10' && gh-pages -d dist",
+    "deploy": "git config --global user.email 'buttwahaj110@gmail.com' && gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-no-errors": "tsc ; vite build",
