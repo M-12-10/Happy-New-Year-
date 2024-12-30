@@ -52,15 +52,6 @@ const CategoryTabs = ({
           {/* Videos content will be rendered by parent */}
         </TabsContent>
       </Tabs>
-
-      {/* Decorative Hello Kitty bow */}
-      <div className="absolute top-2 right-2">
-        <img
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=kittybow"
-          alt="Hello Kitty bow"
-          className="w-8 h-8 opacity-70"
-        />
-      </div>
     </div>
   );
 };
