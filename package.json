@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://m-12-10.github.io/Happy-New-Year-/",
+  "homepage": "https://m-12-10.github.io/Happy-New-Year-",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -r https://github.com/M-12-10/Happy-New-Year-.git",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-no-errors": "tsc ; vite build",
