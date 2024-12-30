@@ -60,6 +60,14 @@ const VideoPlayer = ({
     playerRef.current?.seekTo(Math.min(duration, currentTime + 10));
   };
 
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const bar = e.currentTarget;
+    const rect = bar.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const newTime = (offsetX / rect.width) * duration;
+    playerRef.current?.seekTo(newTime);
+  };
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
@@ -72,7 +80,6 @@ const VideoPlayer = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl bg-pink-50 p-6 rounded-xl">
         <div className="space-y-4">
-          {/* Video Display Area */}
           <div className="relative aspect-video bg-pink-100 rounded-lg overflow-hidden">
             <ReactPlayer
               ref={playerRef}
@@ -96,8 +103,6 @@ const VideoPlayer = ({
                 },
               }}
             />
-
-            {/* Navigation Overlay */}
             <div className="absolute inset-y-0 left-0 flex items-center">
               <Button
                 variant="ghost"
@@ -121,7 +126,6 @@ const VideoPlayer = ({
             </div>
           </div>
 
-          {/* Kawaii-style Controls */}
           <div className="bg-white rounded-full p-4 shadow-md">
             <div className="flex items-center justify-center space-x-6">
               <Button
@@ -169,9 +173,11 @@ const VideoPlayer = ({
               </Button>
             </div>
 
-            {/* Progress Bar */}
             <div className="mt-4 px-4">
-              <div className="h-2 bg-pink-100 rounded-full">
+              <div
+                className="h-2 bg-pink-100 rounded-full cursor-pointer"
+                onClick={handleSeek}
+              >
                 <div
                   className="h-full bg-pink-400 rounded-full transition-all duration-150"
                   style={{ width: `${played * 100}%` }}
