@@ -70,7 +70,24 @@ const PhotoGrid = ({ photos }: PhotoGridProps) => {
             className="group relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-white"
             onClick={() => handlePhotoClick(photo, index)}
           >
-            <div className="aspect-square relative overflow-hidden">
+            <div className="aspect-square relative overflow-hidden group">
+              <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
+                <div className="absolute inset-0">
+                  {[...Array(3)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute animate-float"
+                      style={{
+                        left: `${Math.random() * 80 + 10}%`,
+                        top: `${Math.random() * 80 + 10}%`,
+                        animation: `float 2s ease-in-out infinite ${i * 0.5}s`,
+                      }}
+                    >
+                      ❤️
+                    </div>
+                  ))}
+                </div>
+              </div>
               <img
                 src={photo.url}
                 alt="Photo"

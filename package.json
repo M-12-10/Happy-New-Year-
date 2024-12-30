@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/M-12-10/Happy-New-Year-",
+  "homepage": "https://m-12-10.github.io/Happy-New-Year-/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
@@ -11,8 +11,7 @@
     "build": "tsc && vite build",
     "build-no-errors": "tsc ; vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",

@@ -22,7 +22,9 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
     // Function to get all files from /assets/videos
     const loadVideos = async () => {
       try {
-        const videoFiles = import.meta.glob("/public/assets/videos/*.mp4");
+        const videoFiles = import.meta.glob(
+          "/public/assets/videos/*.{mp4,mkv}",
+        );
         const videoItems: Video[] = Object.keys(videoFiles).map((path) => ({
           id: path,
           videoUrl: path.replace("/public", ""),
@@ -77,8 +79,27 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
                   playsInline
                 >
                   <source src={`${video.videoUrl}#t=0.1`} type="video/mp4" />
+                  <source
+                    src={`${video.videoUrl}#t=0.1`}
+                    type="video/x-matroska"
+                  />
                 </video>
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                  <div className="absolute inset-0">
+                    {[...Array(3)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute animate-kiss"
+                        style={{
+                          left: `${Math.random() * 80 + 10}%`,
+                          top: `${Math.random() * 80 + 10}%`,
+                          animation: `kiss 1.5s ease-in-out infinite ${i * 0.3}s`,
+                        }}
+                      >
+                        💋
+                      </div>
+                    ))}
+                  </div>
                   <Play className="w-12 h-12 text-white" />
                 </div>
               </div>
