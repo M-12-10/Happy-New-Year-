@@ -86,13 +86,15 @@ const FoodGrid = ({ foods }: FoodGridProps) => {
                   {[...Array(5)].map((_, i) => (
                     <div
                       key={i}
-                      className="absolute w-2 h-2 bg-yellow-200 rounded-full"
+                      className="absolute animate-float"
                       style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
                         animation: `sparkle 1.5s linear infinite ${i * 0.3}s`,
                       }}
-                    />
+                    >
+                      🍓
+                    </div>
                   ))}
                 </div>
               </div>
