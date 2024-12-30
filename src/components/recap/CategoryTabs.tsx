@@ -1,66 +1,68 @@
-import React from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Camera, Utensils, Video } from "lucide-react";
+import React, { useState } from "react";
+import { Camera, Utensils, Video, ChevronUp, ChevronDown } from "lucide-react";
 
 interface CategoryTabsProps {
   activeTab?: string;
   onTabChange?: (value: string) => void;
 }
 
+const tabs = [
+  { value: "food", label: "Daily Shenanigans", icon: Utensils },
+  { value: "photos", label: "Photo Gallery", icon: Camera },
+  { value: "videos", label: "Video Memories", icon: Video },
+];
+
 const CategoryTabs = ({
   activeTab = "food",
   onTabChange = () => {},
 }: CategoryTabsProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Move to previous tab
+  const handlePrev = () => {
+    const newIndex = (activeIndex - 1 + tabs.length) % tabs.length;
+    setActiveIndex(newIndex);
+    onTabChange(tabs[newIndex].value); // Update parent
+  };
+
+  // Move to next tab
+  const handleNext = () => {
+    const newIndex = (activeIndex + 1) % tabs.length;
+    setActiveIndex(newIndex);
+    onTabChange(tabs[newIndex].value); // Update parent
+  };
+
+  const activeTabData = tabs[activeIndex];
+  const Icon = activeTabData.icon;
+
   return (
-    <div className="w-full bg-pink-50 p-4">
-      <Tabs
-        defaultValue={activeTab}
-        onValueChange={onTabChange}
-        className="w-full"
+    <div className="w-full bg-pink-50 p-4 flex flex-col items-center">
+      {/* Up Arrow */}
+      <button
+        onClick={handlePrev}
+        className="p-2 rounded-full hover:bg-pink-100 mb-2"
       >
-        <TabsList className="w-full max-w-md mx-auto bg-white/50 p-1">
-          <TabsTrigger
-            value="food"
-            className="flex items-center gap-2 data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700"
-          >
-            <Utensils className="h-4 w-4" />
-            <span>Daily Shenanigans</span>
-          </TabsTrigger>
-          <TabsTrigger
-            value="photos"
-            className="flex items-center gap-2 data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700"
-          >
-            <Camera className="h-4 w-4" />
-            <span>Photo Gallery</span>
-          </TabsTrigger>
-          <TabsTrigger
-            value="videos"
-            className="flex items-center gap-2 data-[state=active]:bg-pink-100 data-[state=active]:text-pink-700"
-          >
-            <Video className="h-4 w-4" />
-            <span>Video Memories</span>
-          </TabsTrigger>
-        </TabsList>
+        <ChevronUp className="h-6 w-6 text-pink-500" />
+      </button>
 
-        <TabsContent value="food" className="mt-4">
-          {/* Food content will be rendered by parent */}
-        </TabsContent>
-        <TabsContent value="photos" className="mt-4">
-          {/* Photos content will be rendered by parent */}
-        </TabsContent>
-        <TabsContent value="videos" className="mt-4">
-          {/* Videos content will be rendered by parent */}
-        </TabsContent>
-      </Tabs>
+      {/* Visible Tab */}
+      <button
+        className="
+          flex items-center gap-2 px-6 py-3 text-base 
+          rounded-lg bg-pink-100 text-pink-700 shadow-md
+        "
+      >
+        <Icon className="h-5 w-5" />
+        <span>{activeTabData.label}</span>
+      </button>
 
-      {/* Decorative Hello Kitty bow */}
-      <div className="absolute top-2 right-10">
-        <img
-          src="public/assets/Screenshot 2024-12-30 140418.png"
-          alt="Hello Kitty bow"
-          className="w-24 opacity-100"
-        />
-      </div>
+      {/* Down Arrow */}
+      <button
+        onClick={handleNext}
+        className="p-2 rounded-full hover:bg-pink-100 mt-2"
+      >
+        <ChevronDown className="h-6 w-6 text-pink-500" />
+      </button>
     </div>
   );
 };
