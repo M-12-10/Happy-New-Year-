@@ -35,4 +35,3 @@ jobs:
         git config --global user.name "M-12-10"
         git remote set-url origin https://github.com/M-12-10/Happy-New-Year-.git
         npm run deploy
-    - run: npm run deploy
