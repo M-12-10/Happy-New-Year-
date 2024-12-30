@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://m-12-10.github.io/Happy-New-Year-",
+  "homepage": "https://m-12-10.github.io/Happy-New-Year-", 
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
