@@ -112,7 +112,7 @@ const Home = () => {
         {/* Stack everything in a column, centered */}
         <div className="flex flex-col items-center"> 
           <img
-            src="public/assets/photos/Screenshot 2024-12-30 140418.png"
+            src="assets/photos/Screenshot 2024-12-30 140418.png"
             alt="Decorative"
             className="w-40 h-auto rounded-full object-cover shadow-md mb-4"
           />
