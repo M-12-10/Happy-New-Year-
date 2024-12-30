@@ -6,7 +6,7 @@
   "homepage": "https://m-12-10.github.io/Happy-New-Year-/",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist -r https://$GH_TOKEN@github.com/M-12-10/Happy-New-Year-.git",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-no-errors": "tsc ; vite build",
