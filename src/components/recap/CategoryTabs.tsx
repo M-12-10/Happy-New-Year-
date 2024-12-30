@@ -52,6 +52,15 @@ const CategoryTabs = ({
           {/* Videos content will be rendered by parent */}
         </TabsContent>
       </Tabs>
+
+      {/* Decorative Hello Kitty bow */}
+      <div className="absolute top-2 right-10">
+        <img
+          src="Screenshot 2024-12-30 140418.png"
+          alt="Hello Kitty bow"
+          className="w-24 opacity-100"
+        />
+      </div>
     </div>
   );
 };
