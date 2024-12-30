@@ -19,17 +19,20 @@ const VideoStrip = ({ videos }: VideoStripProps) => {
   const [localVideos, setLocalVideos] = useState<Video[]>([]);
 
   useEffect(() => {
-    // Load videos directly from the public/assets/videos folder in the GitHub repo
+    // Load videos directly from the public/assets/videos folder
     const loadVideos = async () => {
       try {
-        const response = await fetch(
-          "https://api.github.com/repos/M-12-10/Happy-New-Year-/contents/public/assets/videos",
+        const mp4Files = import.meta.glob("/public/assets/videos/*.mp4", {
+          eager: true,
+        });
+
+        const videoItems: Video[] = Object.entries(mp4Files).map(
+          ([path, module]: [string, any]) => ({
+            id: path,
+            videoUrl: module.default,
+          }),
         );
-        const data = await response.json();
-        const videoItems: Video[] = data.map((file: any) => ({
-          id: file.name,
-          videoUrl: file.download_url,
-        }));
+
         setLocalVideos(videoItems);
       } catch (error) {
         console.error("Error loading videos:", error);
